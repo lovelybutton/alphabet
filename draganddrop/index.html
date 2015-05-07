@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Drag and Drop</title>
+	<style>
+		body {
+			font:18px Helvetica, Arial, sans-serif;
+		}
+		
+		.workspace,
+		.toolbox {
+			margin-bottom:20px;
+			text-align: center;
+		}
+		.workspace > .partition {
+			display:inline-block;
+			padding:20px;
+			border:4px solid #eee;
+		}
+		.toolbox > .tool{
+			display:inline-block;
+			margin:0 0 5px;
+			padding:12px;
+			cursor:move;
+			border:1px solid #000;
+		}
+
+	</style>
+</head>
+<body>
+	<h1>Drag and Drop</h1>
+	<div class="workspace" id="arithmetic">
+		<div class="partition" data-partition="val1">2</div>
+		<div class="partition" data-partition="operand">+</div>
+		<div class="partition" data-partition="val2">2</div>
+		<div class="partition blank-partition">=</div>
+		<div class="partition" data-partition="result">4</div>
+	</div>
+	<div class="toolbox" id="numbers">
+		<div class="tool" data-val="1" draggable="true">1</div>
+		<div class="tool" data-val="2" draggable="true">2</div>
+		<div class="tool" data-val="3" draggable="true">3</div>
+		<div class="tool" data-val="4" draggable="true">4</div>
+		<div class="tool" data-val="5" draggable="true">5</div>
+		<div class="tool" data-val="6" draggable="true">6</div>
+		<div class="tool" data-val="7" draggable="true">7</div>
+		<div class="tool" data-val="8" draggable="true">8</div>
+		<div class="tool" data-val="9" draggable="true">9</div>
+		<div class="tool" data-val="0" draggable="true">0</div>
+	</div>
+	<div class="toolbox" id="operands">
+		<div class="tool" data-val="add" draggable="true">+</div>
+		<div class="tool" data-val="subtract" draggable="true">-</div>
+		<div class="tool" data-val="divide" draggable="true">/</div>
+		<div class="tool" data-val="modulus" draggable="true">%</div>
+	</div>
+
+	<h2>Events:</h2>
+	<ul>
+		<li>dragstart</li>
+		<li>drag</li>
+		<li>dragenter</li>
+		<li>dragleave</li>
+		<li>dragover</li>
+		<li>drop</li>
+		<li>dragend</li>
+	</ul>
+	<p><a href="http://www.html5rocks.com/en/tutorials/dnd/basics/">http://www.html5rocks.com/en/tutorials/dnd/basics/</a></p>
+
+
+	<script>
+	function handleDragStart(e) {
+		this.style.opacity = '0.4';  // this / e.target is the source node.
+	}
+	function handleDragEnd(e) {
+		this.style.opacity = '1';
+	}
+
+	var tools = document.querySelectorAll('.toolbox .tool');
+
+	[].forEach.call(tools, function(tool) {
+		tool.addEventListener('dragstart', handleDragStart, false);
+		tool.addEventListener('dragend', handleDragEnd, false);
+
+	});
+	
+	</script>
+</body>
+</html>
